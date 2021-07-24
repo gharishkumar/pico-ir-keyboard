@@ -1,6 +1,32 @@
 # pico-ir-keyboard
 ## Add IR remote as input to any PC
 - Decoding [NEC protocol IR pulses](https://www.renesas.com/us/en/document/apn/using-infrared-remote-controller-transmission-and-reception?language=en) from remote control with a [Pico](https://www.raspberrypi.org/products/raspberry-pi-pico/) and perform keypress as a USB keyboard (HID).
+## To compile pico-ir-keyboard
+1. Set up your PC to point to use the Raspberry Pi Pico SDK, follow [README](https://github.com/raspberrypi/pico-sdk/blob/master/README.md) in [Raspberry Pi Pico SDK](https://github.com/raspberrypi/pico-sdk).
+1. Clone this GitHub repo
+      ```
+      $ git clone https://github.com/gharishkumar/pico-ir-keyboard.git
+      ```
+1. Change to pico-ir-keyboard directory.
+      ```
+      $ cd pico-ir-keyboard
+      ```
+1. Setup a CMake build directory.
+      For example, if not using an IDE:
+      ```
+      $ mkdir build
+      $ cd build
+      $ cmake ..
+      ```
+1. Make your target from the build directory you created.
+      ```
+      $ make -j4
+      ```
+1. You now have `pico_ir_keyboard.elf` to load via a debugger, or `pico_ir_keyboard.uf2` that can be installed and run on your Raspberry Pi Pico via drag and drop.
+ 
+ **NOTE :**
+   - `IR rx pin`, `IR command` (or) `Keyboard keycode` can be customised in `pico-ir-keyboard/src/main.c`.
+   - By default `GP27` is set as `INPUT`.
 ## Back story
 - It all started with adding IR remote support for [Raspberry Pi 3 Model B+](https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/) with [custom embedded Linux](https://buildroot.org/) for Web Kiosk ( I know [Raspberry Pi GPIO](https://www.raspberrypi.org/documentation/usage/gpio/) can decode IR. I have also decoded [NEC protocol](https://www.renesas.com/us/en/document/apn/using-infrared-remote-controller-transmission-and-reception?language=en) with [Python](https://www.python.org/) in [Raspberry Pi OS](https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit) ).
 - I have no patience in [recompiling the OS](https://buildroot.org/downloads/manual/manual.html#_cross_compilation_toolchain) with [GPIO](https://www.raspberrypi.org/documentation/usage/gpio/) and [Python](https://www.python.org/).
